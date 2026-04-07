@@ -31,8 +31,8 @@ pip install llm-context-collector
 For local development:
 
 ```bash
-git clone https://github.com/t11z/context-collector.git
-cd context-collector
+git clone https://github.com/t11z/llm-context-collector.git
+cd llm-context-collector
 pip install -e ".[dev]"
 ```
 
@@ -273,8 +273,8 @@ Contributions are welcome. This is a small, focused tool — please keep PRs sma
 
 ```bash
 # Setup
-git clone https://github.com/t11z/context-collector.git
-cd context-collector
+git clone https://github.com/t11z/llm-context-collector.git
+cd llm-context-collector
 pip install -e ".[dev]"
 
 # Run tests

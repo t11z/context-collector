@@ -42,10 +42,10 @@ dev = [
 llm-context-collector = "llm_context_collector.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/t11z/context-collector"
-Repository = "https://github.com/t11z/context-collector"
-Issues = "https://github.com/t11z/context-collector/issues"
-Changelog = "https://github.com/t11z/context-collector/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/t11z/llm-context-collector"
+Repository = "https://github.com/t11z/llm-context-collector"
+Issues = "https://github.com/t11z/llm-context-collector/issues"
+Changelog = "https://github.com/t11z/llm-context-collector/blob/main/CHANGELOG.md"
 
 
 [tool.setuptools.packages.find]

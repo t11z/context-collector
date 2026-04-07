@@ -150,7 +150,7 @@ def main(argv: list[str] | None = None) -> None:
             print_error(
                 "No .llm-context-collector.toml found.\n"
                 "Create one in your repository root to define topics.\n"
-                "See: https://github.com/t11z/context-collector#configuration"
+                "See: https://github.com/t11z/llm-context-collector#configuration"
             )
             sys.exit(1)
         print_topics(config.topics)
@@ -165,7 +165,7 @@ def main(argv: list[str] | None = None) -> None:
             "  llm-context-collector --paths <path>...  Collect specific paths\n"
             "  llm-context-collector --list-topics      List available topics\n\n"
             "Create a .llm-context-collector.toml in your repository root to define topics.\n"
-            "See: https://github.com/t11z/context-collector#configuration"
+            "See: https://github.com/t11z/llm-context-collector#configuration"
         )
         sys.exit(1)
 
@@ -182,7 +182,7 @@ def main(argv: list[str] | None = None) -> None:
                 "No .llm-context-collector.toml found.\n"
                 "Create one in your repository root to define topics, "
                 "or use --paths for free-form selection.\n"
-                "See: https://github.com/t11z/context-collector#configuration"
+                "See: https://github.com/t11z/llm-context-collector#configuration"
             )
             sys.exit(1)
 
