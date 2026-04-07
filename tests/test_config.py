@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from context_collector.config import (
+from llm_context_collector.config import (
     ConfigError,
     ProjectConfig,
     find_config_file,
@@ -54,7 +54,7 @@ class TestLoadConfig:
             load_config(bad_toml)
 
     def test_topic_missing_paths_raises_error(self, tmp_path: Path) -> None:
-        config_file = tmp_path / ".context-collector.toml"
+        config_file = tmp_path / ".llm-context-collector.toml"
         config_file.write_text(
             '[topics.broken]\ndescription = "missing paths"\n',
             encoding="utf-8",
@@ -63,7 +63,7 @@ class TestLoadConfig:
             load_config(config_file)
 
     def test_topic_paths_not_list_raises_error(self, tmp_path: Path) -> None:
-        config_file = tmp_path / ".context-collector.toml"
+        config_file = tmp_path / ".llm-context-collector.toml"
         config_file.write_text(
             '[topics.broken]\npaths = "not-a-list"\n',
             encoding="utf-8",
@@ -76,13 +76,13 @@ class TestFindConfigFile:
     def test_finds_config_in_directory(self, sample_repo_path: Path) -> None:
         result = find_config_file(str(sample_repo_path))
         assert result is not None
-        assert result.name == ".context-collector.toml"
+        assert result.name == ".llm-context-collector.toml"
 
     def test_finds_config_in_parent(self, sample_repo_path: Path) -> None:
         child_dir = sample_repo_path / "src" / "routes"
         result = find_config_file(str(child_dir))
         assert result is not None
-        assert result.name == ".context-collector.toml"
+        assert result.name == ".llm-context-collector.toml"
 
     def test_returns_none_when_not_found(self, tmp_path: Path) -> None:
         result = find_config_file(str(tmp_path))

@@ -28,6 +28,6 @@ htmlcov/
 # OS
 .DS_Store
 
-# context-collector output files
+# llm-context-collector output files
 context-*.md
 context.md

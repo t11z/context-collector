@@ -13,7 +13,7 @@ if sys.version_info >= (3, 11):
 else:
     import tomli as tomllib
 
-from context_collector.exclusions import ExclusionConfig
+from llm_context_collector.exclusions import ExclusionConfig
 
 
 @dataclass
@@ -38,7 +38,7 @@ class ConfigError(Exception):
 
 
 def find_config_file(start_dir: str | None = None) -> Path | None:
-    """Search for .context-collector.toml starting from start_dir, walking up to root.
+    """Search for .llm-context-collector.toml starting from start_dir, walking up to root.
 
     Args:
         start_dir: Directory to start searching from. Defaults to cwd.
@@ -50,7 +50,7 @@ def find_config_file(start_dir: str | None = None) -> Path | None:
     current = current.resolve()
 
     while True:
-        candidate = current / ".context-collector.toml"
+        candidate = current / ".llm-context-collector.toml"
         if candidate.is_file():
             return candidate
         parent = current.parent
@@ -65,7 +65,7 @@ def load_config(config_path: str | Path) -> ProjectConfig:
     """Load and validate a configuration file.
 
     Args:
-        config_path: Path to the .context-collector.toml file.
+        config_path: Path to the .llm-context-collector.toml file.
 
     Returns:
         A validated ProjectConfig.

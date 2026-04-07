@@ -7,10 +7,10 @@ import os
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from context_collector.exclusions import ExclusionConfig, is_excluded
+from llm_context_collector.exclusions import ExclusionConfig, is_excluded
 
 if TYPE_CHECKING:
-    from context_collector.config import TopicConfig
+    from llm_context_collector.config import TopicConfig
 
 
 @dataclass

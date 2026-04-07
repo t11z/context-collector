@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea for context-collector
+about: Suggest an idea for llm-context-collector
 title: ""
 labels: enhancement
 assignees: ""

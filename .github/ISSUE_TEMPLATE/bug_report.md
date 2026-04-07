@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a problem with context-collector
+about: Report a problem with llm-context-collector
 title: ""
 labels: bug
 assignees: ""
@@ -21,4 +21,4 @@ What you expected to happen instead.
 **Environment**
 - OS: [e.g., macOS 14, Ubuntu 22.04]
 - Python version: [e.g., 3.12]
-- context-collector version: [e.g., 0.1.0]
+- llm-context-collector version: [e.g., 0.1.0]

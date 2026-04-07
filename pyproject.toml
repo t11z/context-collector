@@ -3,14 +3,14 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "context-collector"
+name = "llm-context-collector"
 version = "0.1.0"
 description = "A small CLI tool to collect source files from a repository into a single Markdown document, ready to share with an LLM."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "context-collector contributors" },
+    { name = "llm-context-collector contributors" },
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -39,13 +39,14 @@ dev = [
 ]
 
 [project.scripts]
-context-collector = "context_collector.cli:main"
+llm-context-collector = "llm_context_collector.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/t11z/context-collector"
-Repository = "https://github.com/t11z/context-collector"
-Issues = "https://github.com/t11z/context-collector/issues"
-Changelog = "https://github.com/t11z/context-collector/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/t11z/llm-context-collector"
+Repository = "https://github.com/t11z/llm-context-collector"
+Issues = "https://github.com/t11z/llm-context-collector/issues"
+Changelog = "https://github.com/t11z/llm-context-collector/blob/main/CHANGELOG.md"
+
 
 [tool.setuptools.packages.find]
 where = ["src"]
