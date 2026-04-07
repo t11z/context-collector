@@ -19,13 +19,13 @@ context-collector automates the boring part. You define topics in a config file 
 The recommended way to install is with [pipx](https://pypa.github.io/pipx/), which installs the tool in an isolated environment:
 
 ```bash
-pipx install context-collector
+pipx install llm-context-collector
 ```
 
 Alternatively, install with pip:
 
 ```bash
-pip install context-collector
+pip install llm-context-collector
 ```
 
 For local development:
