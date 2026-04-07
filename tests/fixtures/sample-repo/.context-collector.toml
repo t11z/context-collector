@@ -1,0 +1,19 @@
+[topics.api]
+description = "API endpoints and routing"
+paths = [
+  "src/app.py",
+  "src/routes/",
+]
+
+[topics.models]
+description = "Data models"
+paths = [
+  "src/models.py",
+]
+
+[topics.everything]
+description = "All source files"
+paths = [
+  "src/",
+  "tests/",
+]
