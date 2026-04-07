@@ -1,0 +1,98 @@
+# context-collector configuration file
+# ====================================
+#
+# Place this file at your repository root as .context-collector.toml
+# Each topic defines a named collection of files you frequently share
+# with an LLM for architecture discussions, code review, or debugging.
+#
+# Usage:
+#   context-collector <topic-name>         # Collect files for a topic
+#   context-collector --list-topics        # See all defined topics
+#   context-collector <topic> --dry-run    # Preview without writing
+
+# --- Topics ---
+# Each topic has a name, an optional description, and a list of paths.
+# Paths can be:
+#   - Exact file paths:  "src/api/auth.py"
+#   - Directory paths:   "src/api/"         (includes all files recursively)
+#   - Glob patterns:     "src/**/*_test.go" (standard glob semantics)
+
+[topics.auth]
+# A focused topic for authentication-related code.
+# Good for discussions about login flows, JWT handling, or security.
+description = "Authentication flow: login, JWT, password handling, user registration"
+paths = [
+  "backend/api/auth.py",
+  "backend/security/jwt.py",
+  "backend/security/password.py",
+  "backend/domain/models.py",
+  "frontend/src/pages/Login.tsx",
+  "frontend/src/pages/Register.tsx",
+  "frontend/src/hooks/useAuth.ts",
+  "backend/tests/integration/test_api_auth.py",
+]
+
+[topics.data-pipeline]
+# A broader topic covering the data processing pipeline.
+# Using directory paths to include everything under those directories.
+description = "Data ingestion, transformation, and storage pipeline"
+paths = [
+  "backend/worker/",
+  "backend/adapters/storage/",
+  "backend/domain/pipeline.py",
+  "backend/ports/storage.py",
+]
+
+[topics.api]
+# Using a glob pattern to include all route files.
+description = "REST API endpoints and middleware"
+paths = [
+  "backend/api/",
+  "backend/middleware/",
+  "backend/api/**/*_schema.py",
+]
+
+[topics.frontend]
+# A large topic — consider using --dry-run first to check the size.
+description = "Frontend React application"
+paths = [
+  "frontend/src/",
+]
+
+[topics.infrastructure]
+# DevOps and infrastructure configuration.
+description = "Docker, CI/CD, and deployment configuration"
+paths = [
+  "Dockerfile",
+  "docker-compose.yml",
+  ".github/workflows/",
+  "terraform/",
+  "scripts/deploy.sh",
+]
+
+# --- Exclusions ---
+# Customize which files are excluded from collection.
+# By default, context-collector already excludes:
+#   - Version control: .git/, .svn/, .hg/
+#   - Generated: node_modules/, __pycache__/, dist/, build/, etc.
+#   - Compiled: *.pyc, *.o, *.so, *.dll, *.class
+#   - Lock files: *.lock, package-lock.json, etc.
+#   - Minified: *.min.js, *.min.css, *.map
+#   - Binary: *.jpg, *.png, *.pdf, *.zip, etc.
+#   - Files > 1 MB
+#   - Non-UTF-8 files
+
+[exclusions]
+# Add project-specific patterns to exclude
+additional = [
+  "docs/generated/",          # Generated documentation
+  "*.snapshot.json",          # Test snapshots
+  "frontend/src/generated/",  # Auto-generated API client
+]
+
+# Uncomment to allow specific file types that are excluded by default
+# (this is rare — only do this if you really need to include e.g. SVGs)
+# remove_defaults = ["*.svg"]
+
+# Override the maximum file size (default: 1048576 = 1 MB)
+# max_file_size = 2097152  # 2 MB
