@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-    from context_collector.collector import CollectedFile
+    from llm_context_collector.collector import CollectedFile
 
 
 def _is_tty() -> bool:

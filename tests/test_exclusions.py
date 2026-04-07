@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from context_collector.exclusions import (
+from llm_context_collector.exclusions import (
     DEFAULT_MAX_FILE_SIZE,
     ExclusionConfig,
     is_excluded,

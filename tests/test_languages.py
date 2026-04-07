@@ -1,6 +1,6 @@
 """Tests for language detection."""
 
-from context_collector.languages import detect_language
+from llm_context_collector.languages import detect_language
 
 
 class TestDetectLanguage:

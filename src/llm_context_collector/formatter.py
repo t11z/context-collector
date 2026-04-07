@@ -6,11 +6,11 @@ import re
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
 
-from context_collector.console import format_size
-from context_collector.languages import detect_language
+from llm_context_collector.console import format_size
+from llm_context_collector.languages import detect_language
 
 if TYPE_CHECKING:
-    from context_collector.collector import CollectedFile
+    from llm_context_collector.collector import CollectedFile
 
 
 def _make_anchor(path: str) -> str:

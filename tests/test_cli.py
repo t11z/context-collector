@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from context_collector.cli import main
+from llm_context_collector.cli import main
 
 SAMPLE_REPO = Path(__file__).parent / "fixtures" / "sample-repo"
 
@@ -99,7 +99,7 @@ class TestCLIIntegration:
             main(["--version"])
         assert exc_info.value.code == 0
         captured = capsys.readouterr()
-        assert "context-collector" in captured.out
+        assert "llm-context-collector" in captured.out
 
     def test_default_output_name_for_topic(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
@@ -122,9 +122,9 @@ class TestCLIModule:
 
     def test_python_m_invocation(self) -> None:
         result = subprocess.run(
-            [sys.executable, "-m", "context_collector", "--version"],
+            [sys.executable, "-m", "llm_context_collector", "--version"],
             capture_output=True,
             text=True,
         )
         assert result.returncode == 0
-        assert "context-collector" in result.stdout
+        assert "llm-context-collector" in result.stdout

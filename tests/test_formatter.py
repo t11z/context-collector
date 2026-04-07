@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from context_collector.collector import CollectedFile
-from context_collector.formatter import estimate_output_size, format_output
+from llm_context_collector.collector import CollectedFile
+from llm_context_collector.formatter import estimate_output_size, format_output
 
 
 @pytest.fixture

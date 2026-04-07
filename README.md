@@ -1,9 +1,9 @@
-# context-collector
+# llm-context-collector
 
 A small CLI tool to collect source files from a repository into a single Markdown document, ready to share with an LLM.
 
 ```
-$ context-collector auth
+$ llm-context-collector auth
 ✓ Collected 8 files (47 KB) from topic 'auth'
   Written to: context-auth.md
 ```
@@ -12,7 +12,7 @@ $ context-collector auth
 
 LLM architecture sparring sessions — whether you're debugging a tricky issue, reviewing an approach, or exploring a refactor — work best when the model can see the full picture. But getting code into a chat interface means copy-pasting files one by one, losing track of what you've shared, and spending more time on context assembly than on the actual conversation.
 
-context-collector automates the boring part. You define topics in a config file (or just point at directories), run one command, and get a single Markdown file with all the relevant source code, properly formatted with syntax highlighting and a table of contents. Drop it into Claude, ChatGPT, Gemini, or any other LLM, and start the conversation with full context.
+llm-context-collector automates the boring part. You define topics in a config file (or just point at directories), run one command, and get a single Markdown file with all the relevant source code, properly formatted with syntax highlighting and a table of contents. Drop it into Claude, ChatGPT, Gemini, or any other LLM, and start the conversation with full context.
 
 ## Installation
 
@@ -38,7 +38,7 @@ pip install -e ".[dev]"
 
 ## Quick Start
 
-1. Create a `.context-collector.toml` in your repository root:
+1. Create a `.llm-context-collector.toml` in your repository root:
 
 ```toml
 [topics.auth]
@@ -53,7 +53,7 @@ paths = [
 2. Run the tool:
 
 ```bash
-context-collector auth
+llm-context-collector auth
 ```
 
 3. Upload the generated `context-auth.md` to your LLM chat.
@@ -62,7 +62,7 @@ That's it. The file contains all the specified source code in a single, well-for
 
 ## Configuration
 
-context-collector reads its configuration from `.context-collector.toml` in your repository root (or any parent directory). The config file defines **topics** — named collections of files that you frequently share together.
+llm-context-collector reads its configuration from `.llm-context-collector.toml` in your repository root (or any parent directory). The config file defines **topics** — named collections of files that you frequently share together.
 
 ### Topics
 
@@ -100,7 +100,7 @@ Paths can be:
 
 ### Exclusions
 
-By default, context-collector excludes common generated files, binaries, lock files, and any file larger than 1 MB. You can customize this:
+By default, llm-context-collector excludes common generated files, binaries, lock files, and any file larger than 1 MB. You can customize this:
 
 ```toml
 [exclusions]
@@ -128,10 +128,10 @@ max_file_size = 2097152
 ## Usage
 
 ```
-Usage: context-collector [TOPIC] [OPTIONS]
+Usage: llm-context-collector [TOPIC] [OPTIONS]
 
 Arguments:
-  TOPIC                   Topic name from .context-collector.toml
+  TOPIC                   Topic name from .llm-context-collector.toml
 
 Options:
   --paths PATH [PATH ...] Free-form path selection (alternative to TOPIC)
@@ -154,41 +154,41 @@ Options:
 Collect a named topic:
 
 ```bash
-context-collector auth
+llm-context-collector auth
 ```
 
 Collect specific paths without a config file:
 
 ```bash
-context-collector --paths backend/api/ backend/security/
+llm-context-collector --paths backend/api/ backend/security/
 ```
 
 Preview what would be collected:
 
 ```bash
-context-collector auth --dry-run
+llm-context-collector auth --dry-run
 ```
 
 List all available topics:
 
 ```bash
-context-collector --list-topics
+llm-context-collector --list-topics
 ```
 
 Write to stdout (for piping to clipboard):
 
 ```bash
 # macOS
-context-collector auth -o - | pbcopy
+llm-context-collector auth -o - | pbcopy
 
 # Linux
-context-collector auth -o - | xclip -selection clipboard
+llm-context-collector auth -o - | xclip -selection clipboard
 ```
 
 Write to a specific file:
 
 ```bash
-context-collector auth -o ~/Desktop/context.md
+llm-context-collector auth -o ~/Desktop/context.md
 ```
 
 ## Typical Workflows
@@ -198,7 +198,7 @@ context-collector auth -o ~/Desktop/context.md
 You're about to refactor the authentication system. You want Claude to review the current state and suggest improvements.
 
 ```bash
-context-collector auth
+llm-context-collector auth
 # Upload context-auth.md to a Claude project or conversation
 # "Here's the current auth implementation. I want to add OAuth2 support. What would you change?"
 ```
@@ -208,7 +208,7 @@ context-collector auth
 A colleague reports a bug in the scan pipeline. You want to give your LLM the full context to help debug.
 
 ```bash
-context-collector scan-pipeline
+llm-context-collector scan-pipeline
 # Upload context-scan-pipeline.md
 # "Users report that duplicate detection fails for files > 100MB. Here's the relevant code."
 ```
@@ -218,7 +218,7 @@ context-collector scan-pipeline
 You don't have a topic defined, but you need to share a few specific files:
 
 ```bash
-context-collector --paths src/api/endpoints.py src/models/ tests/test_api.py
+llm-context-collector --paths src/api/endpoints.py src/models/ tests/test_api.py
 # Upload context.md
 ```
 
@@ -227,7 +227,7 @@ context-collector --paths src/api/endpoints.py src/models/ tests/test_api.py
 Use `--fail-on-large` in CI to catch accidentally bloated context files:
 
 ```bash
-context-collector auth --fail-on-large --max-size 200000 -q
+llm-context-collector auth --fail-on-large --max-size 200000 -q
 ```
 
 ## Output Format
@@ -245,23 +245,23 @@ Language detection covers 30+ file extensions including Python, JavaScript, Type
 
 ### Why not just copy-paste files manually?
 
-You can, and for one or two files it's fine. But once you're regularly sharing 5-15 files for architecture discussions, the manual process gets tedious. You forget files, you lose track of what you've shared, and you spend time on logistics instead of the conversation. context-collector makes it a one-command operation.
+You can, and for one or two files it's fine. But once you're regularly sharing 5-15 files for architecture discussions, the manual process gets tedious. You forget files, you lose track of what you've shared, and you spend time on logistics instead of the conversation. llm-context-collector makes it a one-command operation.
 
 ### Why not use a web tool or IDE extension?
 
-Those work too. context-collector is for people who prefer the terminal, want reproducible topic definitions committed to the repo, and want a tool that works the same way across projects and machines.
+Those work too. llm-context-collector is for people who prefer the terminal, want reproducible topic definitions committed to the repo, and want a tool that works the same way across projects and machines.
 
 ### Does it support my programming language?
 
-context-collector doesn't analyze code — it collects files. It works with any text file in any language. The syntax highlighting in the output covers 30+ languages, but even unsupported extensions get included with plain code fences.
+llm-context-collector doesn't analyze code — it collects files. It works with any text file in any language. The syntax highlighting in the output covers 30+ languages, but even unsupported extensions get included with plain code fences.
 
 ### Is it safe to upload my code to an LLM?
 
-This is a decision you and your organization need to make. context-collector does not upload anything — it only writes a local file. What you do with that file is up to you. Consider your company's policies on sharing code with third-party services, and be mindful of secrets, credentials, or proprietary algorithms in the files you collect.
+This is a decision you and your organization need to make. llm-context-collector does not upload anything — it only writes a local file. What you do with that file is up to you. Consider your company's policies on sharing code with third-party services, and be mindful of secrets, credentials, or proprietary algorithms in the files you collect.
 
 ### What about token limits?
 
-context-collector reports file sizes in bytes, not tokens. Different LLMs have different context windows and tokenization schemes, so byte-to-token conversion varies. As a rough guide, 1 KB of code is roughly 250-400 tokens. The tool warns you when the output exceeds 500 KB (~125K-200K tokens), which approaches the limits of most current models.
+llm-context-collector reports file sizes in bytes, not tokens. Different LLMs have different context windows and tokenization schemes, so byte-to-token conversion varies. As a rough guide, 1 KB of code is roughly 250-400 tokens. The tool warns you when the output exceeds 500 KB (~125K-200K tokens), which approaches the limits of most current models.
 
 ### Can I use glob patterns?
 

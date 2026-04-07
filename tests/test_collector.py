@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from context_collector.collector import resolve_paths, resolve_topic
-from context_collector.config import TopicConfig
-from context_collector.exclusions import ExclusionConfig
+from llm_context_collector.collector import resolve_paths, resolve_topic
+from llm_context_collector.config import TopicConfig
+from llm_context_collector.exclusions import ExclusionConfig
 
 
 @pytest.fixture

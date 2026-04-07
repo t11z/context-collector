@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial release
-- Topic-based file collection via `.context-collector.toml`
+- Topic-based file collection via `.llm-context-collector.toml`
 - Free-form path selection with `--paths`
 - Dry-run mode
 - Size warnings for large outputs

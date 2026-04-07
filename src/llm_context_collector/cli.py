@@ -6,16 +6,16 @@ import argparse
 import os
 import sys
 
-from context_collector import __version__
-from context_collector.collector import resolve_paths, resolve_topic
-from context_collector.config import (
+from llm_context_collector import __version__
+from llm_context_collector.collector import resolve_paths, resolve_topic
+from llm_context_collector.config import (
     ConfigError,
     ProjectConfig,
     find_config_file,
     get_repo_name,
     load_config,
 )
-from context_collector.console import (
+from llm_context_collector.console import (
     format_size,
     print_dry_run,
     print_error,
@@ -24,8 +24,8 @@ from context_collector.console import (
     print_topics,
     print_verbose,
 )
-from context_collector.exclusions import ExclusionConfig
-from context_collector.formatter import estimate_output_size, format_output
+from llm_context_collector.exclusions import ExclusionConfig
+from llm_context_collector.formatter import estimate_output_size, format_output
 
 DEFAULT_SIZE_THRESHOLD = 512_000  # 500 KB
 
@@ -33,18 +33,18 @@ DEFAULT_SIZE_THRESHOLD = 512_000  # 500 KB
 def build_parser() -> argparse.ArgumentParser:
     """Build the argument parser."""
     parser = argparse.ArgumentParser(
-        prog="context-collector",
+        prog="llm-context-collector",
         description=(
             "Collect source files from a repository into a single Markdown document, "
             "ready to share with an LLM."
         ),
         epilog=(
             "Examples:\n"
-            "  context-collector auth                    Collect the 'auth' topic\n"
-            "  context-collector --paths src/api/        Collect all files in src/api/\n"
-            "  context-collector auth --dry-run          Preview what would be collected\n"
-            "  context-collector --list-topics           List all available topics\n"
-            "  context-collector auth -o - | pbcopy      Copy output to clipboard (macOS)\n"
+            "  llm-context-collector auth                    Collect the 'auth' topic\n"
+            "  llm-context-collector --paths src/api/        Collect all files in src/api/\n"
+            "  llm-context-collector auth --dry-run          Preview what would be collected\n"
+            "  llm-context-collector --list-topics           List all available topics\n"
+            "  llm-context-collector auth -o - | pbcopy      Copy output to clipboard (macOS)\n"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -54,7 +54,7 @@ def build_parser() -> argparse.ArgumentParser:
         nargs="?",
         default=None,
         metavar="TOPIC",
-        help="Topic name from .context-collector.toml",
+        help="Topic name from .llm-context-collector.toml",
     )
     parser.add_argument(
         "--paths",
@@ -72,7 +72,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--config",
         metavar="PATH",
         default=None,
-        help="Path to config file (default: .context-collector.toml in cwd or any parent)",
+        help="Path to config file (default: .llm-context-collector.toml in cwd or any parent)",
     )
     parser.add_argument(
         "--dry-run",
@@ -114,7 +114,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--version",
         action="version",
-        version=f"context-collector {__version__}",
+        version=f"llm-context-collector {__version__}",
     )
 
     return parser
@@ -148,7 +148,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.list_topics:
         if config is None:
             print_error(
-                "No .context-collector.toml found.\n"
+                "No .llm-context-collector.toml found.\n"
                 "Create one in your repository root to define topics.\n"
                 "See: https://github.com/t11z/context-collector#configuration"
             )
@@ -161,10 +161,10 @@ def main(argv: list[str] | None = None) -> None:
         print_error(
             "No topic or paths specified.\n"
             "Usage:\n"
-            "  context-collector <topic>           Collect a named topic\n"
-            "  context-collector --paths <path>...  Collect specific paths\n"
-            "  context-collector --list-topics      List available topics\n\n"
-            "Create a .context-collector.toml in your repository root to define topics.\n"
+            "  llm-context-collector <topic>           Collect a named topic\n"
+            "  llm-context-collector --paths <path>...  Collect specific paths\n"
+            "  llm-context-collector --list-topics      List available topics\n\n"
+            "Create a .llm-context-collector.toml in your repository root to define topics.\n"
             "See: https://github.com/t11z/context-collector#configuration"
         )
         sys.exit(1)
@@ -179,7 +179,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.topic:
         if config is None:
             print_error(
-                "No .context-collector.toml found.\n"
+                "No .llm-context-collector.toml found.\n"
                 "Create one in your repository root to define topics, "
                 "or use --paths for free-form selection.\n"
                 "See: https://github.com/t11z/context-collector#configuration"
